@@ -1,0 +1,17 @@
+{
+    "aportante": false,
+    "codigoPaquete": "410",
+    "codigoCombinacion": "001",
+    "enviarCorrespondenciaADomicilio": true,
+    "limiteAcuerdoCC": "0",
+    "limiteGlobal": "100000",
+    "tipoExtracto": "1",
+    "sucursalRadicacionCuenta": "0046",
+    "sucursalOperador": "0046",
+    "tipoEntregaChequera": "4",
+    "cuentas": [
+        {
+            "codigoProducto": "020109"
+        }
+    ]
+}

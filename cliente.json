@@ -1,0 +1,26 @@
+{
+  "tipoPersona": "F",
+  "numeroCliente": "846713",
+  "raiz": "J547899",
+  "esCliente": true,
+  "esTitular": true,
+  "esCotitular": false,
+  "esAdicional": false,
+  "esConyuge": false,
+  "segmento": "PB",
+  "datosFiliatorios": {
+    "tipoDocumento": "3",
+    "numeroDocumento": "24821249",
+    "esCuitCuil": "1",
+    "numeroCuitCuil": "20248212498",
+    "nombreCliente": "Silvana",
+    "apellidoCliente": "Ranelucci"
+  },
+  "analisisCrediticio": {
+    "perfilCliente": "RONA",
+    "comportamientoCliente": "Comportamiento",
+    "tipoRenta": "RD",
+    "renta": "12344.23",
+    "antiguedadCliente": "2020-01-21T17:32:28Z"
+  }
+}

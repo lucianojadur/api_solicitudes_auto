@@ -1,0 +1,10 @@
+{
+ "tipoSolicitud": "02",
+  "codigoCanal": "V",
+  "monto": "500000",
+  "origen": "Manual",
+  "codigoGestionDocumental": "IINT121416184598",
+  "estado": "02",
+  "codigoSucursal": "9999",
+  "excepcion": false
+}
