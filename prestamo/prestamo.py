@@ -2,6 +2,8 @@ import requests
 import json
 from sys import argv
 
+from sys import path
+path.insert(1, '../')
 from escape_codes import *
 from config import *
 
@@ -10,12 +12,12 @@ def alta_prestamo(solicitud_tipo):
 	try:
 		#
 		#Solicitud
-		solicitud_response = post(f"Solicitud", URL_SOLICITUD, 'solicitud'+str(solicitud_tipo)+'.json', "")
+		solicitud_response = post(f"Solicitud", URL_SOLICITUD, '../solicitudes/solicitud'+solicitud_tipo+'.json', "")
 		id_solicitud = str(solicitud_response.json()['idSolicitud'])
 		show("Solicitud", solicitud_response)
 		#
 		#Cliente
-		cliente_response = post("Cliente", URL_CLIENTE, 'cliente.json', id_solicitud)
+		cliente_response = post("Cliente", URL_CLIENTE, '../cliente/cliente.json', id_solicitud)
 		show("Cliente", cliente_response)
 		#
 		#prestamo
@@ -34,13 +36,13 @@ def alta_prestamo(solicitud_tipo):
 		
 
 
-def post(entity_name, entity_url, entity_json_request, id):
+def post(entity_name, entity_url, entity_json_request_file, id):
 	try:
-		entity = open(entity_json_request)
+		entity = open(entity_json_request_file)
 		entity_response = requests.post(entity_url.replace("_id_", id), json=json.load(entity))
 		entity.close()
 	except FileNotFoundError:
-		raise RuntimeError(f"Archivo {entity_json_request} inválido o no existe")
+		raise RuntimeError(f"Archivo {entity_json_request_file} inválido o no existe")
 	except TypeError:
 		entity_response = requests.post(entity_url.replace("_id_", id))
 	
