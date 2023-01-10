@@ -1,10 +1,15 @@
 import pytest
-import prestamo
+
 import sys
-sys.path.insert(1, '/..')
+sys.path.append('../')
 from config import *
-sys.path.append('/../prestamo')
-import prestamo
+sys.path.append('../api')
+import api as API
+
+SOLICITUD_04_PATH = '../solicitudes/solicitud04.json'
+SOLICITUD_86_PATH = '../solicitudes/solicitud86.json'
+PRESTAMO_PATH = '../prestamo/prestamo.json'
+
 
 
 PRESTAMO_BODY = {
@@ -25,33 +30,33 @@ PRESTAMO_BODY = {
 
 
 def test_prestamo_04_post_success():
-	solicitud_response = prestamo.post("Solicitud", URL_SOLICITUD, '../solicitud04.json', "")
+	solicitud_response = API.post("Solicitud", URL_SOLICITUD, SOLICITUD_04_PATH, "")
 	id_solicitud = str(solicitud_response.json()['idSolicitud'])
-	prestamo_response = prestamo.post("Prestamo", URL_PRESTAMO, '../prestamo.json', id_solicitud)
+	prestamo_response = API.post("Prestamo", URL_PRESTAMO, PRESTAMO_PATH, id_solicitud)
 
 	assert prestamo_response.status_code == 200
 
 
 def test_prestamo_86_post_success():
-	solicitud_response = prestamo.post("Solicitud", URL_SOLICITUD, '../solicitud86.json', "")
+	solicitud_response = API.post("Solicitud", URL_SOLICITUD, SOLICITUD_86_PATH, "")
 	id_solicitud = str(solicitud_response.json()['idSolicitud'])
-	prestamo_response = prestamo.post("Prestamo", URL_PRESTAMO, '../prestamo.json', id_solicitud)
+	prestamo_response = API.post("Prestamo", URL_PRESTAMO, PRESTAMO_PATH, id_solicitud)
 
 	assert prestamo_response.status_code == 200
 
 
 def test_prestamo_04_file_not_found_exception():
-	solicitud_response = prestamo.post("Solicitud", URL_SOLICITUD, '../solicitud04.json', "")
+	solicitud_response = API.post("Solicitud", URL_SOLICITUD, SOLICITUD_04_PATH, "")
 	id_solicitud = str(solicitud_response.json()['idSolicitud'])
 
 	with pytest.raises(RuntimeError):
-		prestamo.post("Prestamo", URL_PRESTAMO, 'prestamo04.json', id_solicitud)
+		API.post("Prestamo", URL_PRESTAMO, 'prestamo04.json', id_solicitud)
 
 
 def test_prestamo_invalid_request_body_exception():
 	'''Espera a que se levante un ValueError tras enviar como requerimiento un prestamo inválido (tipoPrestamo = null).'''
-	solicitud_response = prestamo.post("Solicitud", URL_SOLICITUD, '../solicitud86.json', "")
+	solicitud_response = API.post("Solicitud", URL_SOLICITUD, SOLICITUD_86_PATH, "")
 	id_solicitud = str(solicitud_response.json()['idSolicitud'])
 
 	with pytest.raises(ValueError):
-		prestamo.post("Prestamo", URL_PRESTAMO, 'prestam0.json', id_solicitud)
+		API.post("Prestamo", URL_PRESTAMO, 'prestam0.json', id_solicitud)

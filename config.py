@@ -1,3 +1,5 @@
+import escape_codes
+
 id_solicitud = ""
 URL_SOLICITUD       = "http://localhost:28007/apiSolicitudes/solicitud/"
 URL_CLIENTE         = "http://localhost:28007/apiSolicitudes/solicitud/_id_/cliente/"
@@ -8,3 +10,7 @@ URL_CCOMITENTE      = "http://localhost:28007/apiSolicitudes/solicitud/_id_/cuen
 
 URL_ENVIAR			= "http://localhost:28007/apiSolicitudes/solicitud/_id_/enviar/"
 
+
+
+def error_connection_msg():
+	print(CODE[5] + "Error de conexión con la API. Chequear que esté activa." + CODE[0])
