@@ -27,34 +27,42 @@ SOLICITUD_BODY = {
 def alta_paquete():
 	#
 	#Solicitud
-	solicitud = open('solicitud02.json')
-	solicitud_response = requests.post(URL_SOLICITUD, json=json.load(solicitud))
-	solicitud.close()
-	if solicitud_response.status_code != 200:
-		print("Solicitud response status: " + str(solicitud_response.status_code))
-		return
+	solicitud_response = post("Solicitud", URL_SOLICITUD, 'solicitud02.json', "")
 	id_solicitud = str(solicitud_response.json()['idSolicitud'])
-	print(solicitud_response.json())
+	show("Solicitud", solicitud_response)
 	#
 	#Cliente
-	cliente = open('cliente.json')
-	cliente_response = requests.post(URL_CLIENTE.replace("_id_", id_solicitud), json=json.load(cliente))
-	cliente.close()
-	print("Cliente response status: " + str(cliente_response.status_code))
-	if cliente_response.status_code != 200:
-		print(cliente_response.json())
-		return 
+	cliente_response = post("Cliente", URL_CLIENTE, 'cliente.json', id_solicitud)
+	show("Cliente", cliente_response)
 	#
 	#Paquete
-	paquete = open('paquete.json')
-	paquete_response = requests.post(URL_PAQUETE.replace("_id_", id_solicitud), json=json.load(paquete))
-	paquete.close()
-	print("Paquete response status: " + str(paquete_response.status_code))
-	if paquete_response.status_code != 200:
-		print(paquete_response.json())
-		return
-	enviar = requests.post(URL_ENVIAR.replace("_id_",  id_solicitud))
-	print("\nENVIAR: " + str(enviar.status_code))
-	print(enviar.json())
+	paquete_response = post("Paquete", URL_PAQUETE, 'paquete.json', id_solicitud)
+	show("Paquete", paquete_response)
+
+	enviar = post("Enviar", URL_ENVIAR, None, id_solicitud)
+	show("ENVIAR", enviar)
+
+
+def post(entity_name, entity_url, entity_json_request, id):
+	try:
+		entity = open(entity_json_request)
+		entity_response = requests.post(entity_url.replace("_id_", id), json=json.load(entity))
+		entity.close()
+		if entity_response.status_code != 200:
+			show(entity_name, entity_response)
+			return None
+	except TypeError:
+		entity_response = requests.post(entity_url.replace("_id_", id))
+
+	return entity_response
+
+
+def show(entity_name, response):
+	if entity_name != "Solicitud": print(f"{entity_name} response status: " + str(response.status_code))
+	print(response.json())
+	print("\n")
+
 
 alta_paquete()
+
+
