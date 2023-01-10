@@ -1,0 +1,12 @@
+{
+    "tipoSolicitud": "04",
+    "codigoCanal": "O",
+    "codigoOficial": "BR4R",
+    "codigoSucursal": "04",
+    "codigoGestionDocumental": "CRM421905719125653",
+    "monto": "100009.99",
+    "origen": "6546",
+    "motivoRecepcion": "PLD",
+    "estado": "02",
+    "excepcion": false
+  }
