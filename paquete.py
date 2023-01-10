@@ -1,6 +1,5 @@
 import requests
 import json
-import os
 
 from escape_codes import *
 
@@ -33,9 +32,14 @@ def alta_paquete():
 
 		enviar = post("Enviar", URL_ENVIAR, None, id_solicitud)
 		show("ENVIAR", enviar)
+
 	except ValueError:
 		print("Flujo terminado.")
-		return 
+		return
+
+	except requests.exceptions.ConnectionError:
+		print(CODE[5] + "Error de conexión con la API. Chequear que esté activa." + CODE[0])
+		
 
 
 def post(entity_name, entity_url, entity_json_request, id):
@@ -60,7 +64,7 @@ def show(entity_name, response):
 	print(response.json())
 	print("\n")
 
-os.system("")
+
 alta_paquete()
 
 
