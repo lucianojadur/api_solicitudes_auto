@@ -1,5 +1,8 @@
 import requests
 import json
+import os
+
+from escape_codes import *
 
 id_solicitud = ""
 URL_SOLICITUD       = "http://localhost:28007/apiSolicitudes/solicitud/"
@@ -11,36 +14,28 @@ URL_CCOMITENTE      = "http://localhost:28007/apiSolicitudes/solicitud/_id_/cuen
 
 URL_ENVIAR			= "http://localhost:28007/apiSolicitudes/solicitud/_id_/enviar/"
 
-SOLICITUD_BODY = {
-	"tipoSolicitud": "86",
-	"codigoCanal": "O",
-	"codigoOficial": "BR4R",
-	"codigoSucursal": "04",
-	"codigoGestionDocumental": "CRM421905719125653",
-	"monto": "100009.99",
-	"origen": "6546",
-	"motivoRecepcion": "PLD",
-	"estado": "02",
-	"excepcion": "false"
-}
 
 def alta_paquete():
-	#
-	#Solicitud
-	solicitud_response = post("Solicitud", URL_SOLICITUD, 'solicitud02.json', "")
-	id_solicitud = str(solicitud_response.json()['idSolicitud'])
-	show("Solicitud", solicitud_response)
-	#
-	#Cliente
-	cliente_response = post("Cliente", URL_CLIENTE, 'cliente.json', id_solicitud)
-	show("Cliente", cliente_response)
-	#
-	#Paquete
-	paquete_response = post("Paquete", URL_PAQUETE, 'paquete.json', id_solicitud)
-	show("Paquete", paquete_response)
+	try:
+		#
+		#Solicitud
+		solicitud_response = post("Solicitud", URL_SOLICITUD, 'solicitud02.json', "")
+		id_solicitud = str(solicitud_response.json()['idSolicitud'])
+		show("Solicitud", solicitud_response)
+		#
+		#Cliente
+		cliente_response = post("Cliente", URL_CLIENTE, 'cliente.json', id_solicitud)
+		show("Cliente", cliente_response)
+		#
+		#Paquete
+		paquete_response = post("Paquete", URL_PAQUETE, 'paquete.json', id_solicitud)
+		show("Paquete", paquete_response)
 
-	enviar = post("Enviar", URL_ENVIAR, None, id_solicitud)
-	show("ENVIAR", enviar)
+		enviar = post("Enviar", URL_ENVIAR, None, id_solicitud)
+		show("ENVIAR", enviar)
+	except ValueError:
+		print("Flujo terminado.")
+		return 
 
 
 def post(entity_name, entity_url, entity_json_request, id):
@@ -48,21 +43,24 @@ def post(entity_name, entity_url, entity_json_request, id):
 		entity = open(entity_json_request)
 		entity_response = requests.post(entity_url.replace("_id_", id), json=json.load(entity))
 		entity.close()
-		if entity_response.status_code != 200:
-			show(entity_name, entity_response)
-			return None
+	except FileNotFoundError:
+		raise RuntimeError(f"Archivo {entity_json_request} inválido o no existe")
 	except TypeError:
 		entity_response = requests.post(entity_url.replace("_id_", id))
+	
+	if entity_response.status_code != 200:
+		show("ERROR => " + entity_name, entity_response)
+		raise ValueError
 
 	return entity_response
 
 
 def show(entity_name, response):
-	if entity_name != "Solicitud": print(f"{entity_name} response status: " + str(response.status_code))
+	if entity_name != "Solicitud": print(f"{entity_name} response status: " + CODE[response.status_code // 100] + str(response.status_code) + CODE[0])
 	print(response.json())
 	print("\n")
 
-
+os.system("")
 alta_paquete()
 
 
