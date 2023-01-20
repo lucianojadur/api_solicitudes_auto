@@ -8,34 +8,21 @@ from escape_codes import *
 from config import *
 
 path.append('../api')
-import api as API
+import api
 
 
 def alta_paquete(solicitud_tipo):
+	paquete = api.API(solicitud_tipo)
 	try:
-		#
-		#Solicitud
-		solicitud_response = API.post(f"Solicitud", URL_SOLICITUD, '../solicitudes/solicitud'+solicitud_tipo+'.json', "")
-		id_solicitud = str(solicitud_response.json()['idSolicitud'])
-		API.show("Solicitud", solicitud_response)
-		#
-		#Cliente
-		cliente_response = API.post("Cliente", URL_CLIENTE, '../cliente/cliente.json', id_solicitud)
-		API.show("Cliente", cliente_response)
-		#
-		#paquete
-		paquete_response = API.post("paquete", URL_PAQUETE, 'paquete.json', id_solicitud)
-		API.show("paquete", paquete_response)
-
-		enviar = API.post("Enviar", URL_ENVIAR, None, id_solicitud)
-		API.show("ENVIAR", enviar)
-
+		paquete.full_post_sequence()
 	except ValueError:
 		print("Flujo terminado.")
 		return
-
-	except requests.exceptions.ConnectionError:
-		API.error_connection_msg()		
+	except ConnectionError:
+		error_connection_msg()
+		return
+	except RuntimeError:
+		return
 
 
 def main():

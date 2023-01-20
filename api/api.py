@@ -26,7 +26,11 @@ class API:
 			self.show("Cliente", cliente_response)
 			#
 			#prestamo
-			entity_response = self.post("prestamo", config.URL_PRESTAMO, config.PRESTAMO_PATH, id_solicitud)
+			entity_response = self.post(
+				config.entity[self.__sol_type__][0],\
+				config.entity[self.__sol_type__][1],\
+				config.entity[self.__sol_type__][2],\
+				id_solicitud)
 			self.show("prestamo", entity_response)
 
 			enviar = self.post("Enviar", config.URL_ENVIAR, None, id_solicitud)
