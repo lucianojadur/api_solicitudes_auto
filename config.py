@@ -1,4 +1,4 @@
-import escape_codes
+from escape_codes import *
 
 id_solicitud = ""
 URL_SOLICITUD       = "http://localhost:28007/apiSolicitudes/solicitud/"
@@ -9,6 +9,10 @@ URL_PRESTAMO        = "http://localhost:28007/apiSolicitudes/solicitud/_id_/pres
 URL_CCOMITENTE      = "http://localhost:28007/apiSolicitudes/solicitud/_id_/cuentaComitente/"
 
 URL_ENVIAR			= "http://localhost:28007/apiSolicitudes/solicitud/_id_/enviar/"
+
+CLIENTE_PATH = '../cliente/cliente.json'
+PRESTAMO_PATH = '../prestamo/prestamo.json'
+PAQUETE_PATH = '../paquete/paquete.json'
 
 
 
