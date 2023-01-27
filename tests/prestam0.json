@@ -1,0 +1,15 @@
+{
+    "tipoPrestamo": "",
+    "cuenta": "10014773014",
+    "producto": "1110907",
+    "moneda": "ARP",
+    "importe": 1000000,
+    "cantidadCuotas": 24,
+    "vencimiento": "04",
+    "cuentaDebito": "10014773014",
+    "cuentaCredito": "10014773014",
+    "codigoSeguroVida": "99",
+    "codigoDestinoFondos": "0009",
+    "montoMaximoDispCliente": 3000000,
+    "montoMaximoCuotaCliente": 204568
+  }
