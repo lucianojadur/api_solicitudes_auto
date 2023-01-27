@@ -1,17 +1,9 @@
-import requests
-import json
-from sys import argv
 
-from sys import path
-path.insert(1, '../')
-from escape_codes import *
-from config import *
-
-path.append('../api')
-import api
+from api import api
+import config
 
 
-def alta_prestamo(solicitud_tipo):
+def alta(solicitud_tipo):
 	prestamo = api.API(solicitud_tipo)
 	try:
 		prestamo.full_post_sequence()
@@ -19,14 +11,11 @@ def alta_prestamo(solicitud_tipo):
 		print("Flujo terminado.")
 		return
 	except ConnectionError:
-		error_connection_msg()
+		config.error_connection_msg()
 		return
 	except RuntimeError:
 		return
 
 
-def main():
-    alta_prestamo(argv[1])
 
-main()
 

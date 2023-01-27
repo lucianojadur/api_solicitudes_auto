@@ -4,7 +4,8 @@ import sys
 sys.path.append('../')
 from config import *
 sys.path.append('../api')
-import api as API
+from api import API
+
 
 SOLICITUD_04_PATH = '../solicitudes/solicitud04.json'
 SOLICITUD_86_PATH = '../solicitudes/solicitud86.json'
@@ -43,7 +44,7 @@ def test_prestamo_86_post_success():
 	prestamo_response = API.post("Prestamo", URL_PRESTAMO, PRESTAMO_PATH, id_solicitud)
 
 	assert prestamo_response.status_code == 200
-
+ñ
 
 def test_prestamo_04_file_not_found_exception():
 	solicitud_response = API.post("Solicitud", URL_SOLICITUD, SOLICITUD_04_PATH, "")

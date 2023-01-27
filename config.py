@@ -11,9 +11,10 @@ URL_CCOMITENTE      = "http://localhost:28007/apiSolicitudes/solicitud/_id_/cuen
 URL_ENVIAR			= "http://localhost:28007/apiSolicitudes/solicitud/_id_/enviar/"
 
 
-CLIENTE_PATH = '../cliente/cliente.json'
-PRESTAMO_PATH = '../prestamo/prestamo.json'
-PAQUETE_PATH = '../paquete/paquete.json'
+
+CLIENTE_PATH = 'cliente/cliente.json'
+PRESTAMO_PATH = 'prestamo/prestamo.json'
+PAQUETE_PATH = 'paquete/paquete.json'
 
 entity = {
 	"02": ("Paquete", URL_PAQUETE, PAQUETE_PATH),

@@ -1,17 +1,9 @@
-import requests
-import json
-from sys import argv
-
-from sys import path
-path.insert(1, '../')
 from escape_codes import *
-from config import *
-
-path.append('../api')
-import api
+from api import api
+import config
 
 
-def alta_paquete(solicitud_tipo):
+def alta(solicitud_tipo):
 	paquete = api.API(solicitud_tipo)
 	try:
 		paquete.full_post_sequence()
@@ -19,13 +11,10 @@ def alta_paquete(solicitud_tipo):
 		print("Flujo terminado.")
 		return
 	except ConnectionError:
-		error_connection_msg()
+		config.error_connection_msg()
 		return
-	except RuntimeError:
+	except RuntimeError as err:
+		print(err.args)
 		return
 
 
-def main():
-	alta_paquete(argv[1])
-
-main()

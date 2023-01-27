@@ -34,3 +34,4 @@ def test02_post_cliente_sin_solicitud_error():
 	id_inexistente = solicitud_response['idSolicitud'] + 1
 	response = requests.post(URL_CLIENTE + "${id_inexistente}")
 	assert response.status_code // 400 == 1
+

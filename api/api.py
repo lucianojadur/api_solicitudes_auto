@@ -1,8 +1,6 @@
 import requests
 import json
 
-from sys import path
-path.append('../setup')
 from escape_codes import *
 import config
 
@@ -17,7 +15,7 @@ class API:
 		try:
 			#
 			#Solicitud
-			solicitud_response = self.post(f"Solicitud", config.URL_SOLICITUD, '../solicitudes/solicitud'+self.__sol_type__+'.json', "")
+			solicitud_response = self.post(f"Solicitud", config.URL_SOLICITUD, 'solicitudes/solicitud'+self.__sol_type__+'.json', "")
 			id_solicitud = str(solicitud_response.json()['idSolicitud'])
 			self.show("Solicitud", solicitud_response)
 			#
@@ -40,8 +38,8 @@ class API:
 			raise
 		except requests.exceptions.ConnectionError:
 			raise ConnectionError
-		except RuntimeError:
-			raise
+		except RuntimeError as err:
+			raise err
 
 
 	def post(self, entity_name, entity_url, entity_json_request_file, id):
