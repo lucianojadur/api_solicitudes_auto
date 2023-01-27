@@ -13,7 +13,8 @@ def alta(solicitud_tipo):
 	except ConnectionError:
 		config.error_connection_msg()
 		return
-	except RuntimeError:
+	except RuntimeError as err:
+		print(err.args)
 		return
 
 
