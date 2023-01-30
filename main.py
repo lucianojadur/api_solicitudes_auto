@@ -4,14 +4,8 @@ from sys import argv
 path.append('./paquete')
 path.append('prestamo')
 
-import paquete.paquete as Paquete
-import prestamo.prestamo as Prestamo
+import producto.producto as producto
 
-alta = {
-    "02": Paquete,
-    "04": Prestamo,
-    "86": Prestamo,
-}
 
 
 def main():
@@ -19,7 +13,7 @@ def main():
     if len(argv) < 2:
         print("Faltan argumentos para correr el programa")
         return
-    alta[argv[1]].alta(argv[1])
+    producto.alta(argv[1])
 
 
 main()
