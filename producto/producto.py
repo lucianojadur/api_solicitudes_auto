@@ -1,12 +1,12 @@
-
+from escape_codes import *
 from api import api
 import config
 
 
-def alta(solicitud_tipo):
-	prestamo = api.API(solicitud_tipo)
+def alta(request_type):
+	req = api.API(request_type)
 	try:
-		prestamo.full_post_sequence()
+		req.full_post_sequence()
 	except ValueError:
 		print("Flujo terminado.")
 		return
@@ -16,7 +16,5 @@ def alta(solicitud_tipo):
 	except RuntimeError as err:
 		print(err.args)
 		return
-
-
 
 
