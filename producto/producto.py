@@ -10,7 +10,7 @@ def alta(request_type):
 	except ValueError:
 		print("Flujo terminado.")
 		return
-	except ConnectionError:
+	except ConnectionError as err:
 		config.error_connection_msg()
 		return
 	except RuntimeError as err:

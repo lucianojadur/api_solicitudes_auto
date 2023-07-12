@@ -37,6 +37,7 @@ class API:
 		except ValueError:
 			raise
 		except requests.exceptions.ConnectionError:
+			self.show("ERROR => " + "error", entity_response)
 			raise ConnectionError
 		except RuntimeError as err:
 			raise err
@@ -45,15 +46,17 @@ class API:
 	def post(self, entity_name, entity_url, entity_json_request_file, id):
 		try:
 			entity = open(entity_json_request_file)
-			entity_response = requests.post(entity_url.replace("_id_", id), json=json.load(entity))
+			entity_response = requests.post(entity_url.replace("_id_", id), json=json.load(entity), verify=False)
 			entity.close()
 		except FileNotFoundError:
 			raise RuntimeError(f"Archivo {entity_json_request_file} inválido o no existe")
 		except TypeError:
-			entity_response = requests.post(entity_url.replace("_id_", id))
+			entity_response = requests.post(entity_url.replace("_id_", id), verify=False)
 		
 		if entity_response.status_code != 200:
 			self.show("ERROR => " + entity_name, entity_response)
+			self.show(entity_response.status_code)
+			self.show(entity_response.text)
 			raise ValueError
 
 		return entity_response
