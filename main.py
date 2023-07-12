@@ -10,10 +10,11 @@ import producto.producto as producto
 
 def main():
 
-    if len(argv) < 2:
-        print("Faltan argumentos para correr el programa")
+    if len(argv) != 3:
+        print("Faltan argumentos para correr el programa\nUso: python3 main.py <tipo solicitud> <ambiente>")
         return
-    producto.alta(argv[1])
+    
+    producto.alta(argv[1], argv[2])
 
 
 main()

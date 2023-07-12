@@ -3,8 +3,8 @@ from api import api
 import config
 
 
-def alta(request_type):
-	req = api.API(request_type)
+def alta(request_type, environment):
+	req = api.API(request_type, environment)
 	try:
 		req.full_post_sequence()
 	except ValueError:
