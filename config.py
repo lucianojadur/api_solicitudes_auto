@@ -1,14 +1,20 @@
 from escape_codes import *
 
-id_solicitud = ""
-URL_SOLICITUD       = "http://localhost:28007/apiSolicitudes/solicitud/"
-URL_CLIENTE         = "http://localhost:28007/apiSolicitudes/solicitud/_id_/cliente/"
-URL_AUMENTO_LINEA   = "http://localhost:28007/apiSolicitudes/solicitud/_id_/aumentoLinea/"
-URL_PAQUETE         = "http://localhost:28007/apiSolicitudes/solicitud/_id_/paquete/"
-URL_PRESTAMO        = "http://localhost:28007/apiSolicitudes/solicitud/_id_/prestamo/"
-URL_CCOMITENTE      = "http://localhost:28007/apiSolicitudes/solicitud/_id_/cuentaComitente/"
+env = {
+	"local": "localhost:28007",
+	"inte": "10.164.20.232",
+	"homo": "solicitudes.sis.ad.bia.itau"
+}
 
-URL_ENVIAR			= "http://localhost:28007/apiSolicitudes/solicitud/_id_/enviar/"
+id_solicitud = ""
+URL_SOLICITUD       = "http://_env_/apiSolicitudes/solicitud/"
+URL_CLIENTE         = "http://_env_/apiSolicitudes/solicitud/_id_/cliente/"
+URL_AUMENTO_LINEA   = "http://_env_/apiSolicitudes/solicitud/_id_/aumentoLinea/"
+URL_PAQUETE         = "http://_env_/apiSolicitudes/solicitud/_id_/paquete/"
+URL_PRESTAMO        = "http://_env_/apiSolicitudes/solicitud/_id_/prestamo/"
+URL_CCOMITENTE      = "http://_env_/apiSolicitudes/solicitud/_id_/cuentaComitente/"
+
+URL_ENVIAR			= "http://_env_/apiSolicitudes/solicitud/_id_/enviar/"
 
 
 
