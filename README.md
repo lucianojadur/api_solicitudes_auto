@@ -15,9 +15,9 @@ Ejecución:
 ```bash
     python main.py nn env
 ```
-donde
-    -```nn``` es un número entero de 2 dígitos que indica el tipo de solicitud/producto a generar.
-    -```env``` es una palabra que indica el ambiente de prueba. Sus posibles valores son:
-        ```local```: la aplicación corriendo en un puerto local
-        ```inte```: integración
-        ```homo```: homologación
+donde  
+    - ```nn``` es un número entero de 2 dígitos que indica el tipo de solicitud/producto a generar.  
+    - ```env``` es una palabra que indica el ambiente de prueba. Sus posibles valores son:  
+        ```local```: la aplicación corriendo en un puerto local  
+        ```inte```: integración  
+        ```homo```:  
