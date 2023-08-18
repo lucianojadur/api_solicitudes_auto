@@ -1,10 +1,10 @@
 from sys import path
 from sys import argv
 
+from api import api
+
 path.append('./paquete')
 path.append('prestamo')
-
-import producto.producto as producto
 
 
 
@@ -14,8 +14,8 @@ def main():
         print("Faltan argumentos para correr el programa\nUso: python3 main.py <tipo solicitud> <ambiente>")
         return
     
-    producto.alta(argv[1], argv[2])
-
+    app = api.API(argv[1], argv[2])
+    app.alta()
 
 main()
     

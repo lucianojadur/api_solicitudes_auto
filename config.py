@@ -24,15 +24,19 @@ CERT = dir_path + '/sis-ad-bia-itau.pem'
 CLIENTE_PATH = 'cliente/cliente.json'
 PRESTAMO_PATH = 'prestamo/prestamo.json'
 PAQUETE_PATH = 'paquete/paquete.json'
+AUMENTO_PATH = 'aumento_linea/aumento_linea.json'
+
+NAME = 0
+URL = 1
+PATH = 2
 
 entity = {
+	"01": ("Aumento de Línea", URL_AUMENTO_LINEA, AUMENTO_PATH),
 	"02": ("Paquete", URL_PAQUETE, PAQUETE_PATH),
 	"03": ("Cuenta comitente", URL_CCOMITENTE, ".."),
 	"04": ("Prestamo", URL_PRESTAMO, PRESTAMO_PATH),
 	"86": ("Prestamo", URL_PRESTAMO, PRESTAMO_PATH)
 }
-
-
 
 
 def error_connection_msg():

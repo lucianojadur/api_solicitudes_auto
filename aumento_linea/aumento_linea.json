@@ -1,0 +1,20 @@
+{
+    "funcion": "07",
+    "fechaAplicacion": "20211125",
+    "raizCuenta": "AAAAGA",
+    "codigoMoneda": "ARS",
+    "codigoPaquete": "62",
+    "importeLineaGlobal": "100000",
+    "importeOver": "2000",
+    "entidadProductora1": "01",
+    "tipoCarton1": "3",
+    "codigoProducto1": "040512",
+    "importeAModificar1": "15000",
+    "entidadProductora2": "05",
+    "tipoCarton2": "3",
+    "codigoProducto2": "040515",
+    "importeAModificar2": "200000",
+    "limiteTarjetaVisa": "500000",
+    "montoPrestamo": "100000"
+  }
+  

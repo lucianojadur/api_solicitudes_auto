@@ -1,56 +1,97 @@
 import requests
 import json
 
-from escape_codes import *
-import config
-import certifi
 
-import ssl
+from escape_codes import *
+from strategy import strategy
+import config
+import traceback
+#import certifi
+
+
+
 
 class API:
 
 	def __init__(self, solicitud_type, env):
 		self.__sol_type__ = solicitud_type 
 		self.__env__ = env
+		self.product_factory = {
+			"01": strategy.Required,
+			"02": strategy.Required,
+			"03": strategy.Required,
+			"04": strategy.Required,
+			"29": strategy.Unrequired,
+			"30": strategy.Unrequired,
+			"31": strategy.Unrequired,
+			"32": strategy.Unrequired,
+			"33": strategy.Unrequired,
+			"34": strategy.Unrequired,
+			"35": strategy.Unrequired,
+			"36": strategy.Unrequired,
+			"37": strategy.Unrequired,
+			"38": strategy.Unrequired,
+			"39": strategy.Unrequired,
+			"40": strategy.Unrequired,
+			"41": strategy.Unrequired,
+			"86": strategy.Required
+		}
+
+	def alta(self):
+		try:
+			self.full_post_sequence()
+		except ValueError:
+			print("Flujo terminado.")
+			return
+		except ConnectionError:
+			config.error_connection_msg()
+			traceback.print_exc()
+			return
+		except RuntimeError as err:
+			print(err.args)
+			return
+
 
 	def full_post_sequence(self):
 		try:
 			#
 			#Solicitud
-			response = self.post(config.URL_SOLICITUD, 'solicitudes/solicitud'+self.__sol_type__+'.json', "")
+			solicitud = strategy.Solicitud(self.__sol_type__, self.__env__)
+			response = solicitud.post(config.URL_SOLICITUD, 'solicitudes/solicitud'+self.__sol_type__+'.json', "")
 			if response.status_code != 200: 
 				self.show("Solicitud", response, "ERROR =>")
 				return
+			self.show("Solicitud", response)
 			
 			id_solicitud = str(response.json()['idSolicitud'])
-			self.show("Solicitud", response)
-			#
-			#Cliente
-			cliente_response = self.post(config.URL_CLIENTE, config.CLIENTE_PATH, id_solicitud)
+
+			cliente = strategy.Required(self.__sol_type__, self.__env__, id_solicitud)
+			cliente_response = cliente.post(config.URL_CLIENTE, config.CLIENTE_PATH)
 			if response.status_code != 200: 
 				self.show("Cliente", response, "ERROR =>")
 				return
-			
 			self.show("Cliente", cliente_response)
-			#
-			#producto
-			response = self.post(
-				config.entity[self.__sol_type__][1],\
-				config.entity[self.__sol_type__][2],\
+			
+			product = self.product_factory[self.__sol_type__](self.__sol_type__, self.__env__, id_solicitud)	# Instancia un Strategy según si hace falta hacer un POST o no
+			response = product.post(
+				config.entity[self.__sol_type__][config.URL],\
+				config.entity[self.__sol_type__][config.PATH],\
 				id_solicitud)
 			if response.status_code != 200: 
-				self.show(config.entity[self.__sol_type__][1], response, "ERROR =>")
-				return
+				self.show(config.entity[self.__sol_type__][config.URL], response, "ERROR =>")
+				return			
+			self.show(config.entity[self.__sol_type__][config.NAME], response)
 			
-			self.show(config.entity[self.__sol_type__][0], response)
-
-			enviar = self.post(config.URL_ENVIAR, None, id_solicitud)
-			self.show("ENVIAR", enviar)
+			enviar = strategy.Required(self.__sol_type__, self.__env__, id_solicitud)
+			response = enviar.post(config.URL_ENVIAR, None, response)
+			self.show("ENVIAR", response)
 	
 		except ValueError:
 			raise
 		except requests.exceptions.ConnectionError:
-			raise ConnectionError
+			config.error_connection_msg()
+			traceback.print_exc()
+			return
 		except RuntimeError as err:
 			raise err
 
@@ -74,6 +115,6 @@ class API:
 
 
 	def show(self,  entity_name, response, title=""):
-		print(f"{title}{entity_name} response status: " + COLOR[response.status_code // 100] + str(response.status_code) + COLOR[0])
+		print(f"{title} {entity_name} response status: " + COLOR[response.status_code // 100] + str(response.status_code) + COLOR[0])
 		print(response.json())
 		print("\n")
