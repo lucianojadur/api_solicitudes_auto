@@ -2,6 +2,8 @@ from escape_codes import *
 from api import api
 import config
 
+import traceback
+
 
 def alta(request_type, environment):
 	req = api.API(request_type, environment)
@@ -12,6 +14,7 @@ def alta(request_type, environment):
 		return
 	except ConnectionError:
 		config.error_connection_msg()
+		traceback.print_exc()
 		return
 	except RuntimeError as err:
 		print(err.args)
