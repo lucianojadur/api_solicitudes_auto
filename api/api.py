@@ -45,7 +45,7 @@ class API:
 			return
 		except ConnectionError:
 			config.error_connection_msg()
-			traceback.print_exc()
+			#traceback.print_exc()
 			return
 		except RuntimeError as err:
 			print(err.args)
@@ -53,11 +53,13 @@ class API:
 
 
 	def full_post_sequence(self):
+		type = self.__sol_type__
+		if (int(type)  >= 29 and int(type) <= 42): type = '_seguros'
 		try:
 			#
 			#Solicitud
 			solicitud = strategy.Solicitud(self.__sol_type__, self.__env__)
-			response = solicitud.post(config.URL_SOLICITUD, 'solicitudes/solicitud'+self.__sol_type__+'.json', "")
+			response = solicitud.post(config.URL_SOLICITUD, 'solicitudes/solicitud'+type+'.json', "")
 			if response.status_code != 200: 
 				self.show("Solicitud", response, "ERROR =>")
 				return
@@ -66,7 +68,7 @@ class API:
 			id_solicitud = str(response.json()['idSolicitud'])
 
 			cliente = strategy.Required(self.__sol_type__, self.__env__, id_solicitud)
-			cliente_response = cliente.post(config.URL_CLIENTE, config.CLIENTE_PATH)
+			cliente_response = cliente.post(config.URL_CLIENTE, config.CLIENTE_JSON_PATH)
 			if response.status_code != 200: 
 				self.show("Cliente", response, "ERROR =>")
 				return
@@ -75,8 +77,8 @@ class API:
 			product = self.product_factory[self.__sol_type__](self.__sol_type__, self.__env__, id_solicitud)	# Instancia un Strategy según si hace falta hacer un POST o no
 			response = product.post(
 				config.entity[self.__sol_type__][config.URL],\
-				config.entity[self.__sol_type__][config.PATH],\
-				id_solicitud)
+				config.entity[self.__sol_type__][config.JSON_PATH],
+				response)
 			if response.status_code != 200: 
 				self.show(config.entity[self.__sol_type__][config.URL], response, "ERROR =>")
 				return			
@@ -90,7 +92,7 @@ class API:
 			raise
 		except requests.exceptions.ConnectionError:
 			config.error_connection_msg()
-			traceback.print_exc()
+			#traceback.print_exc()
 			return
 		except RuntimeError as err:
 			raise err

@@ -13,6 +13,7 @@ URL_AUMENTO_LINEA   = "https://_env_/apiSolicitudes/solicitud/_id_/aumentoLinea/
 URL_PAQUETE         = "https://_env_/apiSolicitudes/solicitud/_id_/paquete/"
 URL_PRESTAMO        = "https://_env_/apiSolicitudes/solicitud/_id_/prestamo/"
 URL_CCOMITENTE      = "https://_env_/apiSolicitudes/solicitud/_id_/cuentaComitente/"
+URL_SEGURO			= ""
 
 URL_ENVIAR			= "https://_env_/apiSolicitudes/solicitud/_id_/enviar/"
 
@@ -21,21 +22,23 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
 CERT = dir_path + '/sis-ad-bia-itau.pem'
 
 
-CLIENTE_PATH = 'cliente/cliente.json'
-PRESTAMO_PATH = 'prestamo/prestamo.json'
-PAQUETE_PATH = 'paquete/paquete.json'
-AUMENTO_PATH = 'aumento_linea/aumento_linea.json'
+CLIENTE_JSON_PATH = 'cliente/cliente.json'
+PRESTAMO_JSON_PATH = 'prestamo/prestamo.json'
+PAQUETE_JSON_PATH = 'paquete/paquete.json'
+AUMENTO_JSON_PATH = 'aumento_linea/aumento_linea.json'
+SEGURO_JSON_PATH = ''
 
 NAME = 0
 URL = 1
-PATH = 2
+JSON_PATH = 2
 
 entity = {
-	"01": ("Aumento de Línea", URL_AUMENTO_LINEA, AUMENTO_PATH),
-	"02": ("Paquete", URL_PAQUETE, PAQUETE_PATH),
+	"01": ("Aumento de Línea", URL_AUMENTO_LINEA, AUMENTO_JSON_PATH),
+	"02": ("Paquete", URL_PAQUETE, PAQUETE_JSON_PATH),
 	"03": ("Cuenta comitente", URL_CCOMITENTE, ".."),
-	"04": ("Prestamo", URL_PRESTAMO, PRESTAMO_PATH),
-	"86": ("Prestamo", URL_PRESTAMO, PRESTAMO_PATH)
+	"04": ("Prestamo", URL_PRESTAMO, PRESTAMO_JSON_PATH),
+	"29": ("Seguro ATM", URL_SEGURO, SEGURO_JSON_PATH),
+	"86": ("Prestamo", URL_PRESTAMO, PRESTAMO_JSON_PATH)
 }
 
 
