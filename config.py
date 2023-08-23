@@ -2,7 +2,7 @@ from escape_codes import *
 
 env = {
 	"local": "localhost:28007",
-	"inte": "10.164.20.232",
+	"inte": "solicitudesinte.sis.ad.bia.itau",
 	"homo": "solicitudeshomo.sis.ad.bia.itau"
 }
 
