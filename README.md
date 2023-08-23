@@ -18,7 +18,7 @@ Ejecución:
 ```
 
 donde  
-    - ```nn``` es un número entero de 2 dígitos que indica el tipo de solicitud/producto a generar.  
+    - ```xx``` es un número entero de 2 dígitos que indica el tipo de solicitud/producto a generar.  
     - ```env``` es una palabra que indica el ambiente de prueba. Sus posibles valores son:  
     &emsp;&emsp; ```local```: la aplicación corriendo en un puerto local  
     &emsp;&emsp; ```inte```: integración  
