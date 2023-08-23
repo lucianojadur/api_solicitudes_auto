@@ -14,7 +14,7 @@ Ejecución:
 1. (desde el directorio raíz del proyecto):
 ```bash
 
-    python main.py [xx] [env]
+    python app.py [xx] [env]
 ```
 
 donde  
