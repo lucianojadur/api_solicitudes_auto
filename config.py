@@ -38,6 +38,18 @@ entity = {
 	"03": ("Cuenta comitente", URL_CCOMITENTE, ".."),
 	"04": ("Prestamo", URL_PRESTAMO, PRESTAMO_JSON_PATH),
 	"29": ("Seguro ATM", URL_SEGURO, SEGURO_JSON_PATH),
+	"30": ("Seguro Compra Protegida", URL_SEGURO, SEGURO_JSON_PATH),
+	"31": ("Seguro Protección Móvil", URL_SEGURO, SEGURO_JSON_PATH),
+	"32": ("Seguro Accidentes Personales", URL_SEGURO, SEGURO_JSON_PATH),
+	"33": ("Seguro Hogar", URL_SEGURO, SEGURO_JSON_PATH),
+	"34": ("Seguro Bolso Protegido", URL_SEGURO, SEGURO_JSON_PATH),
+	"35": ("Seguro Vida CGA", URL_SEGURO, SEGURO_JSON_PATH),
+	"36": ("Seguro Movilidad Sura", URL_SEGURO, SEGURO_JSON_PATH),
+	"37": ("Seguro Personal Bank", URL_SEGURO, SEGURO_JSON_PATH),
+	"38": ("Seguro Integral de Negocios (PF)", URL_SEGURO, SEGURO_JSON_PATH),
+	"39": ("Seguro Integral de Consorcios (PF)", URL_SEGURO, SEGURO_JSON_PATH),
+	"40": ("Seguro PUA", URL_SEGURO, SEGURO_JSON_PATH),
+	"41": ("Seguro Auto", URL_SEGURO, SEGURO_JSON_PATH),
 	"86": ("Prestamo", URL_PRESTAMO, PRESTAMO_JSON_PATH)
 }
 
