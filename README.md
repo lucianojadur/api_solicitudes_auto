@@ -9,7 +9,7 @@ Ejecución:
 
 0. (en caso de estar parado fuera del directorio del proyecto):
 ```bash
-    cd mi/directorio/padre/de/api_solicitudes_auto
+    cd /directorio/padre/de/api_solicitudes_auto
 ```
 1. (desde el directorio raíz del proyecto):
 ```bash
